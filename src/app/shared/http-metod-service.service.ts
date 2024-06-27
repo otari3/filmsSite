@@ -14,8 +14,8 @@ export class HttpMetodService {
   allMoviesAndTvSeries: FilmModule[] = [];
   allBookMark: FilmModule[] = [];
   gettingData() {
-    this.http.get('assets/data.json').subscribe((data) => {
-      this.allData = data;
+    this.http.get('http://localhost:8080/movies').subscribe((data: any) => {
+      this.allData = data.moveis;
       this.filteringData(this.allData);
     });
   }
