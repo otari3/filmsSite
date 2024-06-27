@@ -1,0 +1,31 @@
+$pureWhite: #ffffff;
+$red: #fc4747;
+$darkBlue: #10141e;
+$semiDarkBlue: #161d2f;
+$greyshBlue: #5a698f;
+.search {
+  margin-left: 164px;
+  margin-top: 64px;
+  display: flex;
+  gap: 20px;
+  input {
+    width: 381px;
+    height: 32px;
+    font-family: "Outfit";
+    font-weight: 300;
+    background-color: transparent;
+    color: $pureWhite;
+    outline: none;
+    border: none;
+    font-size: 24px;
+    &::placeholder {
+      opacity: 49.79%;
+      font-size: 24px;
+      font-family: "Outfit";
+      font-weight: 300;
+    }
+  }
+  label {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,33 @@
+$pureWhite: #ffffff;
+$red: #fc4747;
+$darkBlue: #10141e;
+$semiDarkBlue: #161d2f;
+$greyshBlue: #5a698f;
+nav {
+  position: relative;
+  section {
+    position: fixed;
+    height: 960px;
+    width: 96px;
+    background-color: $semiDarkBlue;
+    border-radius: 10px;
+    left: 32px;
+    top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    .mainIcon {
+      margin-top: 67px;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      li {
+        list-style: none;
+        cursor: pointer;
+      }
+    }
+  }
+}

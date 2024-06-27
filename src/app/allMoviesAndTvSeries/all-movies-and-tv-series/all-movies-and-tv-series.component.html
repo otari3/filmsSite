@@ -1,0 +1,24 @@
+<h1 *ngIf="!searchingInject.valueOfSearchInput">Recommended for you</h1>
+<h1 *ngIf="searchingInject.valueOfSearchInput">
+  Found '{{ results }}' results for '{{ searchingInject.valueOfSearchInput }}'
+</h1>
+<div class="grid" #allMovesAndTvSeries>
+  <ng-container *ngFor="let items of allMoviesAndTvSeries">
+    <app-film-item
+      class="film"
+      [film]="items"
+      *ngIf="searchingInject.showingOrHidingElements(items.title)"
+    ></app-film-item
+  ></ng-container>
+  <!-- trending movies should only be showed when searched -->
+  <!-- we are useing two containers beacuse in first container we only want to show trending when uses searchs -->
+  <!-- and on second container we only need to show what is searched -->
+  <ng-container *ngIf="searchingInject.valueOfSearchInput">
+    <ng-container *ngFor="let items of trendingMovies">
+      <app-film-item
+        [film]="items"
+        *ngIf="searchingInject.showingOrHidingElements(items.title)"
+      ></app-film-item>
+    </ng-container>
+  </ng-container>
+</div>

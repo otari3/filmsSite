@@ -1,0 +1,18 @@
+$pureWhite: #ffffff;
+$red: #fc4747;
+$darkBlue: #10141e;
+$semiDarkBlue: #161d2f;
+$greyshBlue: #5a698f;
+.centering {
+  margin-left: 164px;
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  h1 {
+    color: $pureWhite;
+    font-family: "outfit";
+    font-weight: 300;
+    font-size: 32px;
+  }
+}

@@ -1,0 +1,59 @@
+$pureWhite: #ffffff;
+$red: #fc4747;
+$darkBlue: #10141e;
+$semiDarkBlue: #161d2f;
+$greyshBlue: #5a698f;
+.conteiner {
+  width: 470px;
+  height: 230px;
+  border-radius: 10px;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    z-index: -1;
+  }
+  .circle {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: $darkBlue;
+    opacity: 70%;
+    cursor: pointer;
+    left: 424px;
+    top: 10px;
+    .bookmark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+  .desc {
+    position: absolute;
+    bottom: 15px;
+    left: 24px;
+    h1 {
+      font-size: 24px;
+      color: $pureWhite;
+      font-family: "Outfit";
+      font-weight: 500;
+    }
+    ul {
+      display: flex;
+      gap: 20px;
+
+      li {
+        font-family: "Outfit";
+        font-weight: 300;
+        font-size: 13px;
+        color: $pureWhite;
+        list-style: none;
+        opacity: 75%;
+      }
+    }
+  }
+}

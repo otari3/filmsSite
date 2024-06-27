@@ -1,0 +1,21 @@
+<h1 *ngIf="searching.valueOfSearchInput">
+  Found '{{ result }}' results for '{{ searching.valueOfSearchInput }}';
+</h1>
+<h1 *ngIf="!searching.valueOfSearchInput">Bookmarked Movies</h1>
+<div class="bookMarkMovies" class="flex" #filmBookMarkMovies>
+  <ng-container *ngFor="let items of bookMarkMovies">
+    <app-film-item
+      [film]="items"
+      *ngIf="searching.showingOrHidingElements(items.title)"
+    ></app-film-item>
+  </ng-container>
+</div>
+<h1 *ngIf="!searching.valueOfSearchInput">Bookmarked TV Series</h1>
+<div class="bookMarkTvSeries" class="flex" #filmBookMarkTvSeries>
+  <ng-container *ngFor="let items of bookmarkTvSeries">
+    <app-film-item
+      [film]="items"
+      *ngIf="searching.showingOrHidingElements(items.title)"
+    ></app-film-item>
+  </ng-container>
+</div>

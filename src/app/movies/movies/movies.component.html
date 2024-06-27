@@ -1,0 +1,14 @@
+<h1 *ngIf="!searchHidingOrShowing.valueOfSearchInput">Movies</h1>
+<h1 *ngIf="searchHidingOrShowing.valueOfSearchInput">
+  Found '{{ resultCount }}' results for '{{
+    searchHidingOrShowing.valueOfSearchInput
+  }}';
+</h1>
+<div #movies>
+  <ng-container *ngFor="let items of allMovies">
+    <app-film-item
+      [film]="items"
+      *ngIf="searchHidingOrShowing.showingOrHidingElements(items.title)"
+    ></app-film-item
+  ></ng-container>
+</div>

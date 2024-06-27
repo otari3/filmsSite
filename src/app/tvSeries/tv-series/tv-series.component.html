@@ -1,0 +1,13 @@
+<h1 *ngIf="!search.valueOfSearchInput">TV Series</h1>
+<h1 *ngIf="search.valueOfSearchInput">
+  Found '{{ result }}' results for '{{ search.valueOfSearchInput }}'
+</h1>
+<div #tvSeries>
+  <ng-container *ngFor="let items of allTvSeries">
+    <app-film-item
+      [film]="items"
+      *ngIf="search.showingOrHidingElements(items.title)"
+      class="gettingAllElements"
+    ></app-film-item
+  ></ng-container>
+</div>
