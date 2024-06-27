@@ -1,3 +1,7 @@
-<app-search *ngIf="!(navigation === '/register' || '/login')"></app-search>
-<app-navbar *ngIf="!(navigation === '/register' || '/login')"></app-navbar>
+<app-search
+  *ngIf="!(navigation === '/register' || navigation === '/login')"
+></app-search>
+<app-navbar
+  *ngIf="!(navigation === '/register' || navigation === '/login')"
+></app-navbar>
 <router-outlet></router-outlet>

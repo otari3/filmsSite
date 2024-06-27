@@ -38,6 +38,9 @@ export class HttpMetodService {
     }
     this.bookMark.handelingBookMarkState.next(this.allBookMark);
   }
+  postUser(user: { email: string; password: string }) {
+    return this.http.post('http://localhost:8080/register', user);
+  }
 
   constructor(private http: HttpClient, private bookMark: BookMarkService) {}
 }

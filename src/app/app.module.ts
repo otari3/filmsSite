@@ -15,7 +15,7 @@ import { TrendingComponent } from './trending/trending/trending.component';
 import { TrendingSingleComponent } from './trending/trendingSingle/trending-single/trending-single.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AllMoviesAndTvSeriesComponent } from './allMoviesAndTvSeries/all-movies-and-tv-series/all-movies-and-tv-series.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
 
@@ -35,7 +35,13 @@ import { RegisterComponent } from './register/register/register.component';
     LoginComponent,
     RegisterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
