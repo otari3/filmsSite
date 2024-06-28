@@ -52,6 +52,6 @@
         </svg>
       </li>
     </ul>
-    <a class="login" (click)="onLogIn()">Log in</a>
+    <a class="login" (click)="onLogIn()">{{ token ? "Log out" : "Log in" }}</a>
   </section>
 </nav>

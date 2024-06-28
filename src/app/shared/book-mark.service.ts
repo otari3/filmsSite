@@ -1,6 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { FilmModule } from './film.module';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { HttpMetodService } from './http-metod-service.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +29,11 @@ export class BookMarkService {
   //with first if it checks if it is not bookmarked so it should be place in bookmarks
   //with else if it checks if it should be removed from bookmarkes so if it is arlady bookmarked
   //if it is we check where from our bookmark it should be removed (tvseries or movies)
-
+  postBookMark(id: any, header: HttpHeaders) {
+    return this.http.post('http://localhost:8080/postbookmark', id, {
+      headers: header,
+    });
+  }
   addingInBookMark(film: FilmModule) {
     if (!film.isBookmarked) {
       if (film.category === 'Movie') {
@@ -36,6 +43,17 @@ export class BookMarkService {
         film.isBookmarked = true;
         this.bookMarkTvSeries.push(film);
       }
+      const newHeader = new HttpHeaders({
+        Authorization: `Bearer ${this.auth.gettingLocalStoreg('token')}`,
+      });
+      this.postBookMark(
+        {
+          id: film._id,
+        },
+        newHeader
+      ).subscribe((message) => {
+        console.log(message);
+      });
     } else if (film.isBookmarked) {
       if (film.category === 'TV Series') {
         this.removingBookMarkFromTvSeries(film.title);
@@ -59,5 +77,5 @@ export class BookMarkService {
 
     this.bookMarkMovies.splice(this.bookMarkMovies.indexOf(movie), 1);
   }
-  constructor() {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 }

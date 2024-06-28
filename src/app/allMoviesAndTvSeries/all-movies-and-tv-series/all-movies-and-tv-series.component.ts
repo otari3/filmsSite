@@ -12,6 +12,7 @@ import { HttpMetodService } from '../../shared/http-metod-service.service';
 import { FilmModule } from '../../shared/film.module';
 import { ActivatedRoute } from '@angular/router';
 import { SearchingService } from '../../shared/searching.service';
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
   selector: 'app-all-movies-and-tv-series',
@@ -23,7 +24,8 @@ export class AllMoviesAndTvSeriesComponent implements OnInit, AfterViewChecked {
     private http: HttpMetodService,
     private activtedRouter: ActivatedRoute,
     private searching: SearchingService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private auth: AuthService
   ) {}
   allMoviesAndTvSeries!: FilmModule[];
   searchingInject = inject(SearchingService);
@@ -34,7 +36,7 @@ export class AllMoviesAndTvSeriesComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     this.allMoviesAndTvSeries = this.http.allMoviesAndTvSeries;
     this.searching.changingSearchTitleDependingOnRoute(this.activtedRouter);
-    this.trendingMovies = this.http.trending;
+    this.allMoviesAndTvSeries = this.http.allMoviesAndTvSeries;
   }
   ngAfterViewChecked(): void {
     if (this.searching.valueOfSearchInput) {

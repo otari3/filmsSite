@@ -3,6 +3,7 @@ import { HttpMetodService } from './shared/http-metod-service.service';
 import { BookMarkService } from './shared/book-mark.service';
 import { SearchingService } from './shared/searching.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from './shared/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit {
     private http: HttpMetodService,
     private bookMark: BookMarkService,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private auth: AuthService
   ) {}
   navigation!: string;
   ngOnInit(): void {

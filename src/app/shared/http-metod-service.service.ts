@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FilmModule } from './film.module';
 import { BookMarkService } from './book-mark.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +15,17 @@ export class HttpMetodService {
   allMoviesAndTvSeries: FilmModule[] = [];
   allBookMark: FilmModule[] = [];
   gettingData() {
-    this.http.get('http://localhost:8080/movies').subscribe((data: any) => {
-      this.allData = data.moveis;
-      this.filteringData(this.allData);
+    const newHeader = new HttpHeaders({
+      Authorization: `Bearer ${this.auth.gettingLocalStoreg('token')}`,
     });
+    this.http
+      .get('http://localhost:8080/movies', { headers: newHeader })
+      .subscribe((data: any) => {
+        console.log('we next');
+
+        this.allData = data.moveis;
+        this.filteringData(this.allData);
+      });
   }
   filteringData(allData: FilmModule[]) {
     for (let i = 0; i < allData.length; i++) {
@@ -41,6 +49,16 @@ export class HttpMetodService {
   postUser(user: { email: string; password: string }) {
     return this.http.post('http://localhost:8080/register', user);
   }
+  logIn(user: { email: string; password: string }) {
+    return this.http.post('http://localhost:8080/login', user);
+  }
+  postBookMark(id: string) {
+    return this.http.post('http://localhost:8080/postbookmark', id);
+  }
 
-  constructor(private http: HttpClient, private bookMark: BookMarkService) {}
+  constructor(
+    private http: HttpClient,
+    private bookMark: BookMarkService,
+    private auth: AuthService
+  ) {}
 }
