@@ -14,4 +14,5 @@ export class NavbarComponent {
       return '#5A698F';
     }
   }
+  onLogIn() {}
 }

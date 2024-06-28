@@ -1,1 +1,29 @@
-<p>login works!</p>
+<section>
+  <main>
+    <form [formGroup]="login" (ngSubmit)="onLogIn()">
+      <div class="maindiv">
+        <div>
+          <h1>Login</h1>
+          <input
+            type="text"
+            placeholder="Email address"
+            formControlName="email"
+          />
+          <input
+            type="text"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <div class="buttondiv">
+            <button type="submit">Login to your account</button>
+            <p>
+              Don’t have an account?<span class="login" routerLink="/register"
+                >Sign Up</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </main>
+</section>
