@@ -15,8 +15,7 @@ export class AppComponent implements OnInit {
     private http: HttpMetodService,
     private bookMark: BookMarkService,
     private router: Router,
-    private cd: ChangeDetectorRef,
-    private auth: AuthService
+    private cd: ChangeDetectorRef
   ) {}
   navigation!: string;
   ngOnInit(): void {

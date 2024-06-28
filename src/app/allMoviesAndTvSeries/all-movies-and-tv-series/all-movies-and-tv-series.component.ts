@@ -37,6 +37,7 @@ export class AllMoviesAndTvSeriesComponent implements OnInit, AfterViewChecked {
     this.allMoviesAndTvSeries = this.http.allMoviesAndTvSeries;
     this.searching.changingSearchTitleDependingOnRoute(this.activtedRouter);
     this.allMoviesAndTvSeries = this.http.allMoviesAndTvSeries;
+    this.trendingMovies = this.http.trending;
   }
   ngAfterViewChecked(): void {
     if (this.searching.valueOfSearchInput) {
