@@ -8,6 +8,7 @@ export class AuthService {
   logedIn = new Subject<void>();
   isProceing = false;
   bookMarkedMovies: any = {};
+  notBookMarkedMovies: any = {};
   gettingLocalStoreg(key: string) {
     return localStorage.getItem(key);
   }

@@ -44,14 +44,10 @@ export class BookMarkService {
   addingInBookMark(film: FilmModule, btn: any) {
     if (this.auth.gettingLocalStoreg('token')) {
       if (!film.isBookmarked) {
-        this.auth.bookMarkedMovies[film._id] = false;
-        if (film.category === 'Movie') {
-          film.isBookmarked = true;
-          this.bookMarkMovies.push(film);
-        } else if (film.category === 'TV Series') {
-          film.isBookmarked = true;
-          this.bookMarkTvSeries.push(film);
+        if (this.auth.notBookMarkedMovies[film._id]) {
+          return;
         }
+        this.auth.notBookMarkedMovies[film._id] = true;
         const newHeader = new HttpHeaders({
           Authorization: `Bearer ${this.auth.gettingLocalStoreg('token')}`,
         });
@@ -60,7 +56,22 @@ export class BookMarkService {
             id: film._id,
           },
           newHeader
-        ).subscribe((message) => {});
+        )
+          .pipe(
+            finalize(() => {
+              this.auth.notBookMarkedMovies[film._id] = false;
+            })
+          )
+          .subscribe((message) => {
+            this.auth.bookMarkedMovies[film._id] = false;
+            if (film.category === 'Movie') {
+              film.isBookmarked = true;
+              this.bookMarkMovies.push(film);
+            } else if (film.category === 'TV Series') {
+              film.isBookmarked = true;
+              this.bookMarkTvSeries.push(film);
+            }
+          });
       } else if (film.isBookmarked) {
         const newHeader = new HttpHeaders({
           Authorization: `Bearer ${this.auth.gettingLocalStoreg('token')}`,
