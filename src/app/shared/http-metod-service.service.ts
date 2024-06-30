@@ -21,8 +21,6 @@ export class HttpMetodService {
     this.http
       .get('http://localhost:8080/movies', { headers: newHeader })
       .subscribe((data: any) => {
-        console.log('we next');
-
         this.allData = data.moveis;
         this.filteringData(this.allData);
       });
