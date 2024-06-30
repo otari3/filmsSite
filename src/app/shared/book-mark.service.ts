@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { FilmModule } from './film.module';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, finalize, tap } from 'rxjs';
 import { HttpMetodService } from './http-metod-service.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
@@ -16,6 +16,7 @@ export class BookMarkService {
   filteringAllBookMark() {
     this.handelingBookMarkState.subscribe((data: FilmModule[]) => {
       for (let i = 0; i < data.length; i++) {
+        this.auth.bookMarkedMovies[data[i]._id] = false;
         if (data[i].category === 'Movie') {
           this.bookMarkMovies.push(data[i]);
         }
@@ -35,9 +36,15 @@ export class BookMarkService {
       headers: header,
     });
   }
-  addingInBookMark(film: FilmModule) {
+  deletingBookMark(id: string, header: HttpHeaders) {
+    return this.http.delete(`http://localhost:8080/deletbookmar/${id}`, {
+      headers: header,
+    });
+  }
+  addingInBookMark(film: FilmModule, btn: any) {
     if (this.auth.gettingLocalStoreg('token')) {
       if (!film.isBookmarked) {
+        this.auth.bookMarkedMovies[film._id] = false;
         if (film.category === 'Movie') {
           film.isBookmarked = true;
           this.bookMarkMovies.push(film);
@@ -53,16 +60,29 @@ export class BookMarkService {
             id: film._id,
           },
           newHeader
-        ).subscribe((message) => {
-          console.log(message);
-        });
+        ).subscribe((message) => {});
       } else if (film.isBookmarked) {
-        if (film.category === 'TV Series') {
-          this.removingBookMarkFromTvSeries(film.title);
-        } else if (film.category === 'Movie') {
-          this.removingBookMarkFromMovies(film.title);
+        const newHeader = new HttpHeaders({
+          Authorization: `Bearer ${this.auth.gettingLocalStoreg('token')}`,
+        });
+        if (this.auth.bookMarkedMovies[film._id]) {
+          return;
         }
-        film.isBookmarked = false;
+        this.auth.bookMarkedMovies[film._id] = true;
+        this.deletingBookMark(film._id, newHeader)
+          .pipe(
+            finalize(() => {
+              this.auth.bookMarkedMovies[film._id] = false;
+            })
+          )
+          .subscribe(() => {
+            if (film.category === 'TV Series') {
+              this.removingBookMarkFromTvSeries(film.title);
+            } else if (film.category === 'Movie') {
+              this.removingBookMarkFromMovies(film.title);
+            }
+            film.isBookmarked = false;
+          });
       }
     } else {
       this.router.navigate(['/login']);

@@ -12,7 +12,7 @@ export class FilmItemComponent implements OnInit {
   constructor(private bookMark: BookMarkService) {}
   @Input() film!: FilmModule;
   ngOnInit(): void {}
-  addingInBookMark(item: FilmModule) {
-    this.bookMark.addingInBookMark(item);
+  addingInBookMark(item: FilmModule, btn: any) {
+    this.bookMark.addingInBookMark(item, btn);
   }
 }

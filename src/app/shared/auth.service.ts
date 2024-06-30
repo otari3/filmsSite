@@ -6,6 +6,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class AuthService {
   logedIn = new Subject<void>();
+  isProceing = false;
+  bookMarkedMovies: any = {};
   gettingLocalStoreg(key: string) {
     return localStorage.getItem(key);
   }
