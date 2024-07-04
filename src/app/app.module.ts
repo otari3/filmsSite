@@ -18,6 +18,7 @@ import { AllMoviesAndTvSeriesComponent } from './allMoviesAndTvSeries/all-movies
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { RegisterComponent } from './register/register/register.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

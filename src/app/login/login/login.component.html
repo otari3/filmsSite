@@ -1,3 +1,8 @@
+<div class="testUser">
+  <h1>This is for Test User</h1>
+  <p>Email: test&#64;gmail.com</p>
+  <p>Password: test1234</p>
+</div>
 <section>
   <main>
     <form [formGroup]="login" (ngSubmit)="onLogIn(test)" #test>
@@ -50,7 +55,10 @@
             />
           </div>
           <div class="buttondiv">
-            <button type="submit">Login to your account</button>
+            <button type="submit">
+              <p class="dot-elastic" *ngIf="loadingStarted"></p>
+              <p *ngIf="!loadingStarted">Login to your account</p>
+            </button>
             <p>
               Don’t have an account?<span class="login" routerLink="/register"
                 >Sign Up</span

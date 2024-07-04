@@ -15,6 +15,7 @@ export class HttpMetodService {
   allMoviesAndTvSeries: FilmModule[] = [];
   allBookMark: FilmModule[] = [];
   gettingData() {
+    this.auth.loadingStarted.next(true);
     const newHeader = new HttpHeaders({
       Authorization: `Bearer ${this.auth.gettingLocalStoreg('token')}`,
     });
@@ -25,6 +26,7 @@ export class HttpMetodService {
       .subscribe((data: any) => {
         this.allData = data.moveis;
         this.filteringData(this.allData);
+        this.auth.loadingStarted.next(false);
       });
   }
   filteringData(allData: FilmModule[]) {

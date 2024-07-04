@@ -1,3 +1,8 @@
+<mat-progress-bar
+  mode="determinate"
+  [value]="loadingbar"
+  *ngIf="loadingStarted"
+></mat-progress-bar>
 <app-search
   *ngIf="!(navigation === '/register' || navigation === '/login')"
 ></app-search>

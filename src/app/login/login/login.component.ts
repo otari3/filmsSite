@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpMetodService } from '../../shared/http-metod-service.service';
 import { AuthService } from '../../shared/auth.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   constructor(
     private http: HttpMetodService,
     private auth: AuthService,
@@ -23,6 +23,7 @@ export class LoginComponent {
   isEmptyEmail = false;
   isTypingPasswordValue = false;
   isEmptyPassword = false;
+  loadingStarted = false;
   isTypingChange(value: any) {
     if (value.value === '') {
       this.isEmptyEmail = true;
@@ -46,6 +47,7 @@ export class LoginComponent {
     console.log(this.login.controls);
 
     if (this.login.get('email')?.value && this.login.get('password')?.value) {
+      this.loadingStarted = true;
       this.http
         .logIn({
           email: this.login.get('email')?.value,
@@ -53,6 +55,7 @@ export class LoginComponent {
         })
         .subscribe(
           (token: any) => {
+            this.loadingStarted = false;
             this.auth.settingLocalStoreg('token', token.token);
             this.router.navigate(['/']).then(() => {
               location.reload();
@@ -65,5 +68,8 @@ export class LoginComponent {
     } else {
       alert('there is empty value');
     }
+  }
+  ngOnInit(): void {
+    this.auth.loadingStarted.next(false);
   }
 }

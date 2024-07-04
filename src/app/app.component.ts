@@ -15,10 +15,32 @@ export class AppComponent implements OnInit {
     private http: HttpMetodService,
     private bookMark: BookMarkService,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private auth: AuthService
   ) {}
   navigation!: string;
+  loadingbar = 0;
+  loadingStarted = false;
+  onLoadingStarted() {
+    let addingToLoadingBar = setInterval(() => {
+      if (!this.loadingStarted) {
+        clearInterval(addingToLoadingBar);
+        this.loadingbar = 0;
+      }
+      if (this.loadingbar < 90) {
+        this.loadingbar += 10;
+      }
+    }, 100);
+  }
   ngOnInit(): void {
+    this.auth.loadingStarted.subscribe((starter: boolean) => {
+      if (starter) {
+        this.loadingStarted = true;
+        this.onLoadingStarted();
+      } else if (!starter) {
+        this.loadingStarted = false;
+      }
+    });
     this.http.gettingData();
     this.bookMark.filteringAllBookMark();
     this.router.events.subscribe((event: any) => {

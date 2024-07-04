@@ -1,3 +1,4 @@
+@use "three-dots" with($dot-color: white);
 * {
   margin: 0;
   padding: 0;
@@ -47,6 +48,9 @@ main {
         background-color: #fb4747;
         border: none;
         width: 336px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         &:hover {
           background-color: white;
           color: black;
@@ -98,4 +102,16 @@ input.ng-touched {
 .email.empty,
 .password.empty {
   border-bottom: 1px solid #fb4747 !important;
+}
+.testUser {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  p {
+    color: white;
+  }
+  h1 {
+    color: white;
+  }
 }
