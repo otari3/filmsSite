@@ -42,7 +42,7 @@ export class BookMarkService {
   }
   deletingBookMark(id: string, header: HttpHeaders) {
     return this.http.delete(
-      `https://filmsitebackend.onrender.comdeletbookmar/${id}`,
+      `https://filmsitebackend.onrender.com/deletbookmar/${id}`,
       {
         headers: header,
       }
