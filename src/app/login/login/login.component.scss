@@ -12,7 +12,7 @@ section {
 }
 main {
   width: 400px;
-  height: 418px;
+  height: 340px;
   background-color: #171d2f;
   border-radius: 10px;
   .maindiv {
@@ -23,7 +23,7 @@ main {
       display: flex;
       flex-direction: column;
       margin-top: 20px;
-      gap: 24px;
+      gap: 5px;
       h1 {
         color: white;
         font-family: "Outfit";
@@ -39,6 +39,7 @@ main {
         font-family: "Outfit";
         font-weight: 500;
         padding-left: 15px;
+        outline: none;
       }
       button {
         height: 48px;
@@ -46,6 +47,11 @@ main {
         background-color: #fb4747;
         border: none;
         width: 336px;
+        &:hover {
+          background-color: white;
+          color: black;
+          transition: 0.3s;
+        }
         cursor: pointer;
         font-family: "Outfit";
         font-weight: 500;
@@ -69,4 +75,27 @@ main {
     font-weight: lighter;
     color: white;
   }
+}
+.formadded {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  gap: 0;
+  p {
+    align-self: flex-end;
+    color: #fb4747;
+    margin: 0;
+    font-size: 14px;
+  }
+}
+input.ng-touched {
+  border-bottom: 1px solid #fb4747 !important;
+}
+.email.typing,
+.password.typing {
+  border-bottom: 1px solid gray !important;
+}
+.email.empty,
+.password.empty {
+  border-bottom: 1px solid #fb4747 !important;
 }

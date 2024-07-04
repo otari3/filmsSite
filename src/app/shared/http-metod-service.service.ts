@@ -19,7 +19,9 @@ export class HttpMetodService {
       Authorization: `Bearer ${this.auth.gettingLocalStoreg('token')}`,
     });
     this.http
-      .get('http://localhost:8080/movies', { headers: newHeader })
+      .get('https://filmsitebackend.onrender.com/movies', {
+        headers: newHeader,
+      })
       .subscribe((data: any) => {
         this.allData = data.moveis;
         this.filteringData(this.allData);
@@ -45,13 +47,19 @@ export class HttpMetodService {
     this.bookMark.handelingBookMarkState.next(this.allBookMark);
   }
   postUser(user: { email: string; password: string }) {
-    return this.http.post('http://localhost:8080/register', user);
+    return this.http.post(
+      'https://filmsitebackend.onrender.com/register',
+      user
+    );
   }
   logIn(user: { email: string; password: string }) {
-    return this.http.post('http://localhost:8080/login', user);
+    return this.http.post('https://filmsitebackend.onrender.com/login', user);
   }
   postBookMark(id: string) {
-    return this.http.post('http://localhost:8080/postbookmark', id);
+    return this.http.post(
+      'https://filmsitebackend.onrender.com/postbookmark',
+      id
+    );
   }
 
   constructor(

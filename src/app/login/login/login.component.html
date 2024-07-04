@@ -1,19 +1,54 @@
 <section>
   <main>
-    <form [formGroup]="login" (ngSubmit)="onLogIn()">
+    <form [formGroup]="login" (ngSubmit)="onLogIn(test)" #test>
       <div class="maindiv">
         <div>
           <h1>Login</h1>
-          <input
-            type="text"
-            placeholder="Email address"
-            formControlName="email"
-          />
-          <input
-            type="text"
-            placeholder="Password"
-            formControlName="password"
-          />
+          <div class="formadded">
+            <p
+              *ngIf="
+                (login.get('email')?.touched && !login.get('email')?.dirty) ||
+                isEmptyEmail
+              "
+            >
+              can't be empty
+            </p>
+            <input
+              class="email"
+              #inputValue
+              type="text"
+              placeholder="Email address"
+              formControlName="email"
+              (input)="isTypingChange(inputValue)"
+              [class.typing]="isTypingEmail"
+              [class.empty]="isEmptyEmail"
+              name="login-email"
+              autocomplete="username"
+            />
+          </div>
+          <div class="formadded">
+            <p
+              *ngIf="
+                (login.get('password')?.touched &&
+                  !login.get('password')?.dirty) ||
+                isEmptyPassword
+              "
+            >
+              can't be empty
+            </p>
+            <input
+              class="password"
+              type="password"
+              placeholder="Password"
+              formControlName="password"
+              #password
+              (input)="isTypingPassword(password)"
+              [class.typing]="isTypingPasswordValue"
+              [class.empty]="isEmptyPassword"
+              name="login-password"
+              autocomplete="current-password"
+            />
+          </div>
           <div class="buttondiv">
             <button type="submit">Login to your account</button>
             <p>

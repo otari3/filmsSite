@@ -32,17 +32,25 @@ export class BookMarkService {
   //with else if it checks if it should be removed from bookmarkes so if it is arlady bookmarked
   //if it is we check where from our bookmark it should be removed (tvseries or movies)
   postBookMark(id: any, header: HttpHeaders) {
-    return this.http.post('http://localhost:8080/postbookmark', id, {
-      headers: header,
-    });
+    return this.http.post(
+      'https://filmsitebackend.onrender.com/postbookmark',
+      id,
+      {
+        headers: header,
+      }
+    );
   }
   deletingBookMark(id: string, header: HttpHeaders) {
-    return this.http.delete(`http://localhost:8080/deletbookmar/${id}`, {
-      headers: header,
-    });
+    return this.http.delete(
+      `https://filmsitebackend.onrender.comdeletbookmar/${id}`,
+      {
+        headers: header,
+      }
+    );
   }
   addingInBookMark(film: FilmModule, btn: any) {
     if (this.auth.gettingLocalStoreg('token')) {
+      // when we want to bookmark
       if (!film.isBookmarked) {
         if (this.auth.notBookMarkedMovies[film._id]) {
           return;
@@ -72,6 +80,7 @@ export class BookMarkService {
               this.bookMarkTvSeries.push(film);
             }
           });
+        //when we want to unbookmark
       } else if (film.isBookmarked) {
         const newHeader = new HttpHeaders({
           Authorization: `Bearer ${this.auth.gettingLocalStoreg('token')}`,
